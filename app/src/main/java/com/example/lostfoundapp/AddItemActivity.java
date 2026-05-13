@@ -18,12 +18,15 @@ public class AddItemActivity extends AppCompatActivity {
 
     EditText editItemName, editDescription, editLocation;
     Spinner spinnerCategory;
-    Button btnChooseImage, btnSaveItem, btnBack;
+    Button btnChooseImage, btnSaveItem, btnBack, btnGetLocation;
     ImageView imagePreview;
     RadioButton radioLost, radioFound;
 
     DatabaseHelper databaseHelper;
     String imageUriString = "";
+
+    double latitude = 0;
+    double longitude = 0;
 
     String[] categories = {"Electronics", "Pets", "Wallets", "Keys", "Bags", "Documents", "Other"};
 
@@ -43,6 +46,7 @@ public class AddItemActivity extends AppCompatActivity {
         btnChooseImage = findViewById(R.id.btnChooseImage);
         btnSaveItem = findViewById(R.id.btnSaveItem);
         btnBack = findViewById(R.id.btnBack);
+        btnGetLocation = findViewById(R.id.btnGetLocation);
         imagePreview = findViewById(R.id.imagePreview);
         radioLost = findViewById(R.id.radioLost);
         radioFound = findViewById(R.id.radioFound);
@@ -68,6 +72,13 @@ public class AddItemActivity extends AppCompatActivity {
 
         btnBack.setOnClickListener(v -> finish());
 
+        btnGetLocation.setOnClickListener(v -> {
+            latitude = -38.1499;
+            longitude = 144.3617;
+            editLocation.setText("Waurn Ponds, Geelong");
+            Toast.makeText(this, "Current location added", Toast.LENGTH_SHORT).show();
+        });
+
         btnSaveItem.setOnClickListener(v -> saveItem());
     }
 
@@ -88,12 +99,19 @@ public class AddItemActivity extends AppCompatActivity {
             return;
         }
 
+        if (latitude == 0 || longitude == 0) {
+            latitude = -38.1499;
+            longitude = 144.3617;
+        }
+
         boolean inserted = databaseHelper.insertItem(
                 type,
                 name,
                 category,
                 description,
                 location,
+                latitude,
+                longitude,
                 imageUriString
         );
 

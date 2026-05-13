@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnAddItem, btnViewItems;
+    Button btnAddItem, btnViewItems, btnShowMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnAddItem = findViewById(R.id.btnAddItem);
         btnViewItems = findViewById(R.id.btnViewItems);
+        btnShowMap = findViewById(R.id.btnShowMap);
 
         btnAddItem.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
@@ -25,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnViewItems.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ItemListActivity.class);
+            startActivity(intent);
+        });
+
+        btnShowMap.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(intent);
         });
     }

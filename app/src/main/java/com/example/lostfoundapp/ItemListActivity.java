@@ -2,6 +2,7 @@ package com.example.lostfoundapp;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,7 +21,9 @@ public class ItemListActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
     ArrayList<LostFoundItem> itemList;
 
-    String[] filterCategories = {"All", "Electronics", "Pets", "Wallets", "Keys", "Bags", "Documents", "Other"};
+    String[] filterCategories = {
+            "All", "Electronics", "Pets", "Wallets", "Keys", "Bags", "Documents", "Other"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,8 @@ public class ItemListActivity extends AppCompatActivity {
 
         spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, android.view.View view, int position, long id) {
-                String selectedCategory = filterCategories[position];
-                loadItems(selectedCategory);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                loadItems(filterCategories[position]);
             }
 
             @Override
@@ -59,7 +61,6 @@ public class ItemListActivity extends AppCompatActivity {
 
     private void loadItems(String category) {
         itemList = new ArrayList<>();
-
         Cursor cursor;
 
         if (category.equals("All")) {

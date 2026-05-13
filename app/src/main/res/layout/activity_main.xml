@@ -28,6 +28,13 @@
         android:id="@+id/btnViewItems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show All Items" />
+        android:text="Show All Items"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnShowMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show On Map" />
 
 </LinearLayout>

@@ -44,7 +44,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Found" />
-
         </RadioGroup>
 
         <EditText
@@ -75,6 +74,13 @@
             android:layout_height="wrap_content"
             android:hint="Location"
             android:layout_marginTop="12dp" />
+
+        <Button
+            android:id="@+id/btnGetLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Current Location"
+            android:layout_marginTop="8dp" />
 
         <ImageView
             android:id="@+id/imagePreview"

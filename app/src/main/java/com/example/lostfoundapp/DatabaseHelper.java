@@ -21,11 +21,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_CATEGORY = "category";
     public static final String COL_DESCRIPTION = "description";
     public static final String COL_LOCATION = "location";
+    public static final String COL_LATITUDE = "latitude";
+    public static final String COL_LONGITUDE = "longitude";
     public static final String COL_IMAGE = "image";
     public static final String COL_DATE = "date_time";
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override
@@ -37,6 +39,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_CATEGORY + " TEXT, " +
                 COL_DESCRIPTION + " TEXT, " +
                 COL_LOCATION + " TEXT, " +
+                COL_LATITUDE + " REAL, " +
+                COL_LONGITUDE + " REAL, " +
                 COL_IMAGE + " TEXT, " +
                 COL_DATE + " TEXT)";
         db.execSQL(createTable);
@@ -48,7 +52,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertItem(String type, String name, String category, String description, String location, String image) {
+    public boolean insertItem(String type, String name, String category, String description,
+                              String location, double latitude, double longitude, String image) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String currentDateTime = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(new Date());
@@ -59,6 +64,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_CATEGORY, category);
         values.put(COL_DESCRIPTION, description);
         values.put(COL_LOCATION, location);
+        values.put(COL_LATITUDE, latitude);
+        values.put(COL_LONGITUDE, longitude);
         values.put(COL_IMAGE, image);
         values.put(COL_DATE, currentDateTime);
 
